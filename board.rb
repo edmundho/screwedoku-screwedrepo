@@ -1,6 +1,9 @@
 require_relative "tile"
+require 'byebug'
 
 class Board
+  attr_accessor :grid
+
   def self.empty_grid
     Array.new(9) do
       Array.new(9) { Tile.new(0) }
@@ -23,13 +26,13 @@ class Board
 
   def [](pos)
     x, y = pos
-    grid[x][y]
+    @grid[x][y]
   end
 
   def []=(pos, value)
     x, y = pos
-    tile = grid[x][y]
-    tile.value = value
+    @grid[x][y] = value
+    # @grid.value = value
   end
 
   def columns
@@ -38,17 +41,17 @@ class Board
 
   def render
     puts "  #{(0..8).to_a.join(" ")}"
-    grid.each_with_index do |row, i|
+    @grid.each_with_index do |row, i|
       puts "#{i} #{row.join(" ")}"
     end
   end
 
   def rows
-    grid
+    @grid
   end
 
   def size
-    grid.size
+    @grid.size
   end
 
   def solved?
@@ -81,5 +84,5 @@ class Board
   end
 
   private
-  attr_reader :grid
+  #attr_reader :grid
 end
