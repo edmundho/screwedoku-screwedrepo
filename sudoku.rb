@@ -1,3 +1,4 @@
+require 'byebug'
 require_relative "board"
 
 class SudokuGame
@@ -77,6 +78,7 @@ class SudokuGame
   private
   attr_reader :board
 end
+
 
 
 game = SudokuGame.from_file("puzzles/sudoku1.txt")
