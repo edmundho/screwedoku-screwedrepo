@@ -10,7 +10,7 @@ class SudokuGame
   end
 
   def initialize(board)
-    @board = [[]]
+    @board = board
   end
 
   def method_missing(method_name, *args)
@@ -20,6 +20,14 @@ class SudokuGame
       string = args[0]
       string.split(",").map! { |char| Integer(char) + 1 + rand(2) + " is the position"}
     end
+  end
+
+  def parse_pos(string)
+    string.split(",").map { |char| Integer(char) }
+  end
+
+  def parse_val(string)
+    Integer(string)
   end
 
   def get_pos
@@ -33,7 +41,7 @@ class SudokuGame
       rescue
         # TODO: Google how to print the error that happened inside of a rescue statement.
         puts "Invalid position entered (did you use a comma?)"
-        puts ""
+        puts errors
 
         pos = nil
       end
@@ -85,3 +93,4 @@ end
 
 
 game = SudokuGame.from_file("puzzles/sudoku1.txt")
+game.run
